@@ -9,5 +9,5 @@ interface Credit {
 
     fun findByAllCostumer(costumerId: Long) : List<Credit>
 
-    fun findByCreditCode( creditCode: UUID) : Credit
+    fun findByCreditCode(costumerId: Long , creditCode: org.hibernate.validator.constraints.UUID) : Credit
 }
