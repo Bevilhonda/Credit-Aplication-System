@@ -1,6 +1,6 @@
-package Curso.Kotlin.credit.aplication.system.Repository
+package Curso.Kotlin.credit.aplication.system.repository
 
-import Curso.Kotlin.credit.aplication.system.Model.Credit
+import Curso.Kotlin.credit.aplication.system.model.Credit
 import org.hibernate.validator.constraints.UUID
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

@@ -1,6 +1,6 @@
-package Curso.Kotlin.credit.aplication.system.Repository
+package Curso.Kotlin.credit.aplication.system.repository
 
-import Curso.Kotlin.credit.aplication.system.Model.Costumer
+import Curso.Kotlin.credit.aplication.system.model.Costumer
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

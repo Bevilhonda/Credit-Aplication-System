@@ -1,4 +1,4 @@
-package Curso.Kotlin.credit.aplication.system.Model
+package Curso.Kotlin.credit.aplication.system.model
 
 import jakarta.persistence.*
 

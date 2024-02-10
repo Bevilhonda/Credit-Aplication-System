@@ -1,6 +1,6 @@
-package Curso.Kotlin.credit.aplication.system.Service
+package Curso.Kotlin.credit.aplication.system.service
 
-import Curso.Kotlin.credit.aplication.system.Model.Costumer
+import Curso.Kotlin.credit.aplication.system.model.Costumer
 
 interface Costumer {
 

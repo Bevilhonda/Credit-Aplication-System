@@ -1,7 +1,6 @@
-package Curso.Kotlin.credit.aplication.system.Service
+package Curso.Kotlin.credit.aplication.system.service
 
-import Curso.Kotlin.credit.aplication.system.Model.Credit
-import java.util.UUID
+import Curso.Kotlin.credit.aplication.system.model.Credit
 
 interface Credit {
 

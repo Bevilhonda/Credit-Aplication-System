@@ -1,7 +1,7 @@
-package Curso.Kotlin.credit.aplication.system.Model
+package Curso.Kotlin.credit.aplication.system.model
 
 import jakarta.persistence.*
-import Curso.Kotlin.credit.aplication.system.Enumeration.Status
+import Curso.Kotlin.credit.aplication.system.enumeration.Status
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.util.UUID
