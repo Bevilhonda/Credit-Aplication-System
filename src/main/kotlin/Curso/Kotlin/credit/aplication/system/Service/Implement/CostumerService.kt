@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service
 class CostumerService(
     private val costumerRepository: CostumerRepository
 ) : Costumer {
-    override fun save(costumer: Curso.Kotlin.credit.aplication.system.Model.Costumer): Curso.Kotlin.credit.aplication.system.Model.Costumer =
+    override fun save(costumer: Curso.Kotlin.credit.aplication.system.Model.Customer): Curso.Kotlin.credit.aplication.system.Model.Customer =
         this.costumerRepository.save(costumer)
 
-    override fun findById(id: Long): Curso.Kotlin.credit.aplication.system.Model.Costumer =
+    override fun findById(id: Long): Curso.Kotlin.credit.aplication.system.Model.Customer =
         this.costumerRepository.findById(id).orElseThrow {
             throw RuntimeException("ID $id not found")
         }
