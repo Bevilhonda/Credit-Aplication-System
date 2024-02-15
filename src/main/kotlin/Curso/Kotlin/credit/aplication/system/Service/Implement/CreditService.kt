@@ -5,6 +5,7 @@ import java.util.*
 import org.springframework.stereotype.Service
 import Curso.Kotlin.credit.aplication.system.Model.Credit
 import Curso.Kotlin.credit.aplication.system.Service.ICreditService
+import Curso.Kotlin.credit.aplication.system.exceptions.BusinesExceptions
 
 @Service
 class CreditService(
@@ -22,14 +23,18 @@ class CreditService(
         this.creditRepository.findAllByCostumerId(costumerId)
 
 
-    override fun findByCreditCode(costumerId: Long,creditCode: UUID): Credit {
-        val credit: Credit =(this.creditRepository.findByCreditCode(creditCode)
-                ?: throw RuntimeException("CreditCode $creditCode not found"))
+    override fun findByCreditCode(costumerId: Long, creditCode: UUID): Credit {
+        val credit: Credit = (this.creditRepository.findByCreditCode(creditCode)
+            ?: throw BusinesExceptions("Creditcode $creditCode not found"))
+        return if (credit.customer?.id == costumerId) credit
+        else throw IllegalArgumentException("Contact admin")
 
-        if (credit.customer?.id == costumerId) {
+        /*if (credit.customer?.id == costumerId) {
             return credit
         } else {
             throw RuntimeException("Contact Administrador")
         }
+
+         */
     }
 }

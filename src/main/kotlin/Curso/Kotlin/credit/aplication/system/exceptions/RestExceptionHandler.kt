@@ -38,7 +38,8 @@ class RestExceptionHandler {
     fun handlerValidException(ex: DataAccessException):
             ResponseEntity<ExceptionsDetails> {
         return ResponseEntity.status(HttpStatus.CONFLICT)
-            .body(ExceptionsDetails(
+            .body(
+                ExceptionsDetails(
                     title = "Conflict , consult the documentation",
                     timestamp = LocalDateTime.now(),
                     status = HttpStatus.CONFLICT.value(),
@@ -60,5 +61,32 @@ class RestExceptionHandler {
          */
     }
 
+    @ExceptionHandler(BusinesExceptions::class)
+    fun handlerValidException(ex: BusinesExceptions):
+            ResponseEntity<ExceptionsDetails> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(
+                ExceptionsDetails(
+                    title = "Bad request , consult the documentation",
+                    timestamp = LocalDateTime.now(),
+                    status = HttpStatus.BAD_REQUEST.value(),
+                    exception = ex.javaClass.toString(),
+                    details = mutableMapOf(ex.cause.toString() to ex.message)
+                )
+            )
+    }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handlerValidException(ex: IllegalArgumentException): ResponseEntity<ExceptionsDetails> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(
+                ExceptionsDetails(
+                    title = "Bad Request! Consult the documentation",
+                    timestamp = LocalDateTime.now(),
+                    status = HttpStatus.BAD_REQUEST.value(),
+                    exception = ex.javaClass.toString(),
+                    details = mutableMapOf(ex.cause.toString() to ex.message)
+                )
+            )
+    }
 }
