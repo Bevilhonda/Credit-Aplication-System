@@ -12,7 +12,7 @@ class CreditService(
 ) : Credit {
     override fun save(credit: Curso.Kotlin.credit.aplication.system.Model.Credit): Curso.Kotlin.credit.aplication.system.Model.Credit {
         credit.apply {// função apply do kotlin
-            costumer = customerService.findById(credit.costumer?.id!!)
+            customer = customerService.findById(credit.customer?.id!!)
         } // com o apply verifica se o costumer que esta tentando salvar no banco existe
         return this.creditRepository.save(credit)
     }
@@ -30,7 +30,7 @@ class CreditService(
             (this.creditRepository.findByCreditCode(creditCode)
                 ?: throw RuntimeException("CreditCode $creditCode not found"))
 
-        if (credit.costumer?.id == costumerId) {
+        if (credit.customer?.id == costumerId) {
             return credit
         } else {
             throw RuntimeException("Contact Administrador")
