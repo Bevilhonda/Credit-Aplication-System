@@ -5,6 +5,7 @@ import Curso.Kotlin.credit.aplication.system.Service.Implement.CreditService
 import Curso.Kotlin.credit.aplication.system.controllers.dto.CreditDto
 import Curso.Kotlin.credit.aplication.system.controllers.dto.CreditView
 import Curso.Kotlin.credit.aplication.system.controllers.dto.CreditViewList
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,7 +23,7 @@ import java.util.stream.Collectors
 class CreditResource(private val creditService: CreditService) {
 
     @PostMapping()
-    fun saveCredit(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
+    fun saveCredit(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val credit: Credit = this.creditService.save(creditDto.toEntity())
 
         return ResponseEntity
