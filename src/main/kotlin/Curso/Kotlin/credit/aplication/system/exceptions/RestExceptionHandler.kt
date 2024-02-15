@@ -1,5 +1,6 @@
 package Curso.Kotlin.credit.aplication.system.exceptions
 
+import org.springframework.dao.DataAccessException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.FieldError
@@ -12,13 +13,12 @@ import java.time.LocalDateTime
 @RestControllerAdvice
 class RestExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handlerValidException(ex : MethodArgumentNotValidException) :
-            ResponseEntity<ExceptionsDetails>{
-        val errors : MutableMap<String,String?> = HashMap()
-        ex.bindingResult.allErrors.stream().forEach {
-            error : ObjectError ->
-            val fieldName : String = (error as FieldError ).field
-            val messageError : String? = error.defaultMessage
+    fun handlerValidException(ex: MethodArgumentNotValidException):
+            ResponseEntity<ExceptionsDetails> {
+        val errors: MutableMap<String, String?> = HashMap()
+        ex.bindingResult.allErrors.stream().forEach { error: ObjectError ->
+            val fieldName: String = (error as FieldError).field
+            val messageError: String? = error.defaultMessage
             errors[fieldName] = messageError
 
         }
@@ -29,7 +29,36 @@ class RestExceptionHandler {
                 status = HttpStatus.BAD_REQUEST.value(),
                 exception = ex.javaClass.toString(),
                 details = errors
-            ),HttpStatus.BAD_REQUEST
+            ), HttpStatus.BAD_REQUEST
         )
     }
+
+
+    @ExceptionHandler(DataAccessException::class)
+    fun handlerValidException(ex: DataAccessException):
+            ResponseEntity<ExceptionsDetails> {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+            .body(ExceptionsDetails(
+                    title = "Conflict , consult the documentation",
+                    timestamp = LocalDateTime.now(),
+                    status = HttpStatus.CONFLICT.value(),
+                    exception = ex.javaClass.toString(),
+                    details = mutableMapOf(ex.cause.toString() to ex.message)
+                )
+            )
+
+        /*return ResponseEntity(
+            ExceptionsDetails(
+                title = "Bad request , consult the documentation",
+                timestamp = LocalDateTime.now(),
+                status = HttpStatus.CONFLICT.value(),
+                exception = ex.javaClass.toString(),
+                details = mutableMapOf(ex.cause.toString() to ex.message)
+            ),HttpStatus.CONFLICT
+        )
+
+         */
+    }
+
+
 }
