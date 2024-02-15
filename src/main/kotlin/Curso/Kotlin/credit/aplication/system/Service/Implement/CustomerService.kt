@@ -1,21 +1,25 @@
 package Curso.Kotlin.credit.aplication.system.Service.Implement
 
-import Curso.Kotlin.credit.aplication.system.Repository.CostumerRepository
-import Curso.Kotlin.credit.aplication.system.Service.Costumer
+import Curso.Kotlin.credit.aplication.system.Model.Customer
+import Curso.Kotlin.credit.aplication.system.Repository.CustomerRepository
+import Curso.Kotlin.credit.aplication.system.Service.ICostumerService
 import org.springframework.stereotype.Service
 
 @Service
-class CostumerService(
-    private val costumerRepository: CostumerRepository
-) : Costumer {
-    override fun save(costumer: Curso.Kotlin.credit.aplication.system.Model.Customer): Curso.Kotlin.credit.aplication.system.Model.Customer =
-        this.costumerRepository.save(costumer)
+class CustomerService(
+    private val customerRepository: CustomerRepository
+) : ICostumerService {
+    override fun save(costumer: Customer): Customer =
+        this.customerRepository.save(costumer)
 
-    override fun findById(id: Long): Curso.Kotlin.credit.aplication.system.Model.Customer =
-        this.costumerRepository.findById(id).orElseThrow {
+    override fun findById(id: Long): Customer =
+        this.customerRepository.findById(id).orElseThrow {
             throw RuntimeException("ID $id not found")
         }
-    override fun delete(id: Long) =
-        this.costumerRepository.deleteById(id)
+    override fun delete(id: Long){
+        val customer: Customer = this.findById(id)
+        this.customerRepository.delete(customer)
+
+    }
 
 }

@@ -3,7 +3,7 @@ package Curso.Kotlin.credit.aplication.system.controllers.dto
 import java.math.BigDecimal
 import java.util.*
 import Curso.Kotlin.credit.aplication.system.Enumeration.Status
-import Curso.Kotlin.credit.aplication.system.Model.CreditEntity
+import Curso.Kotlin.credit.aplication.system.Model.Credit
 
 data class CreditView(
     val creditCode : UUID,
@@ -13,10 +13,10 @@ data class CreditView(
     val emailCustomer : String?,
     val incomeCustomer : BigDecimal?
 ) {
-    constructor(credit : CreditEntity ): this(
+    constructor(credit : Credit ): this(
         creditCode = credit.creditCode,
         creditValue = credit.creditValue,
-        numberOffInstalment = credit.numberOffInstalmente,
+        numberOffInstalment = credit.numberOfInstallments,
         status= credit.status,
         emailCustomer = credit.customer?.email,
         incomeCustomer = credit.customer?.income

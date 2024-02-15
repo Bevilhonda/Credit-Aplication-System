@@ -1,6 +1,6 @@
 package Curso.Kotlin.credit.aplication.system.controllers
 
-import Curso.Kotlin.credit.aplication.system.Model.CreditEntity
+import Curso.Kotlin.credit.aplication.system.Model.Credit
 import Curso.Kotlin.credit.aplication.system.Service.Implement.CreditService
 import Curso.Kotlin.credit.aplication.system.controllers.dto.CreditDto
 import Curso.Kotlin.credit.aplication.system.controllers.dto.CreditView
@@ -23,7 +23,7 @@ class CreditResource(private val creditService: CreditService) {
 
     @PostMapping()
     fun saveCredit(@RequestBody creditDto: CreditDto): ResponseEntity<String> {
-        val credit: CreditEntity = this.creditService.save(creditDto.toEntity())
+        val credit: Credit = this.creditService.save(creditDto.toEntity())
 
         return ResponseEntity
             .status(CREATED)
@@ -35,7 +35,7 @@ class CreditResource(private val creditService: CreditService) {
     fun findAllByCustomer(@RequestParam(value = "customerId") customerId: Long): ResponseEntity<List<CreditViewList>> {
         val creditListView: List<CreditViewList> = this.creditService.findByAllCostumer(customerId)
             .stream()
-            .map { credit: CreditEntity -> CreditViewList(credit) }
+            .map { credit: Credit -> CreditViewList(credit) }
             .collect(Collectors.toList())
 
         return ResponseEntity.status(OK).body(creditListView)
@@ -47,7 +47,7 @@ class CreditResource(private val creditService: CreditService) {
         @RequestParam(value = "customerId") customerId: Long,
         @PathVariable creditCode: UUID
     ): ResponseEntity<CreditView> {
-        val credit: CreditEntity = this.creditService.findByCreditCode(customerId, creditCode)
+        val credit: Credit = this.creditService.findByCreditCode(customerId, creditCode)
         return ResponseEntity.status(OK).body(CreditView(credit))
     }
 }
