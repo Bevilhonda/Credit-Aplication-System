@@ -17,6 +17,6 @@ data class Customer(
         fetch = FetchType.LAZY,
         cascade = arrayOf((CascadeType.REMOVE), CascadeType.PERSIST), mappedBy = "customer"
     )
-    var credits: List<Credit> = mutableListOf(),
+    var credits: List<CreditEntity> = mutableListOf(),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null
 )
