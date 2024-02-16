@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service
 import Curso.Kotlin.credit.aplication.system.Model.Credit
 import Curso.Kotlin.credit.aplication.system.Service.ICreditService
 import Curso.Kotlin.credit.aplication.system.exceptions.BusinesExceptions
+import java.time.LocalDate
 
 @Service
 class CreditService(
@@ -36,5 +37,9 @@ class CreditService(
         }
 
          */
+    }
+    private fun validDayFirstInstallment(dayFirstInstallment: LocalDate): Boolean {
+        return if (dayFirstInstallment.isBefore(LocalDate.now().plusMonths(3))) true
+        else throw BusinesExceptions("Invalid Date")
     }
 }
