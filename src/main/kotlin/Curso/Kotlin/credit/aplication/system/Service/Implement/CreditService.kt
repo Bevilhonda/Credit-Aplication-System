@@ -25,19 +25,11 @@ class CreditService(
 
 
     override fun findByCreditCode(costumerId: Long, creditCode: UUID): Credit {
-        val credit: Credit = (this.creditRepository.findByCreditCode(creditCode)
-            ?: throw BusinesExceptions("Creditcode $creditCode not found"))
-        return if (credit.customer?.id == costumerId) credit
-        else throw IllegalArgumentException("Contact admin")
-
-        /*if (credit.customer?.id == costumerId) {
-            return credit
-        } else {
-            throw RuntimeException("Contact Administrador")
-        }
-
-         */
+        val credit: Credit? = this.creditRepository.findByCreditCode(creditCode)
+        return credit?.takeIf { it.customer?.id == costumerId }
+            ?: throw BusinesExceptions("Creditcode $creditCode not found")
     }
+
     private fun validDayFirstInstallment(dayFirstInstallment: LocalDate): Boolean {
         return if (dayFirstInstallment.isBefore(LocalDate.now().plusMonths(3))) true
         else throw BusinesExceptions("Invalid Date")
